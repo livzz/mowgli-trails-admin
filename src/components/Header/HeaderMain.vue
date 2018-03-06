@@ -16,6 +16,9 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch('actionLogout', this.toLogin);
+    },
+    toLogin() {
+      this.$router.push('/login');
     }
   }
 };
