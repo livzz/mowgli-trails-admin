@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import SuiVue from 'semantic-ui-vue';
+import vueFire from 'vuefire'
 
 import App from './App';
 import router from './router';
@@ -9,7 +10,7 @@ import store from './store/index';
 
 Vue.config.productionTip = false;
 Vue.use(SuiVue);
-
+Vue.use(vueFire);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

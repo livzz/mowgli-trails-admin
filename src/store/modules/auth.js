@@ -1,4 +1,4 @@
-import { app } from '../../firebase';
+import {app} from '../../firebase';
 
 const state = {
   isAuthenticated: false,
@@ -47,11 +47,8 @@ const actions = {
   initAuthState({ commit }) {
     app.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log(user);
-        console.log('User Signed in!!');
         commit('mutateAuthState', true);
       } else {
-        console.log('No one signed in!!');
         commit('mutateAuthState', false);
       }
     });

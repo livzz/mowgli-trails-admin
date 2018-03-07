@@ -1,8 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-
 // import HelloWorld from '@/components/HelloWorld';
-import AdminMain from '@/components/AdminMain';
+import AdminMain from '@/components/Admin/AdminMain';
 import TourMain from '@/components/Tour/TourMain';
 import BlogMain from '@/components/Blog/BlogMain';
 import LoginMain from '@/components/Login/LoginMain';
