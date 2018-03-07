@@ -7,8 +7,8 @@
     </div>
     <div v-if="!loading && craft === null">
       <div class="ui raised segment pointer" v-for="craft in craftCustomers" @click="viewDetail(craft)">
+        <p class="ui header">{{craft.name}}</p>
         <p>{{craft.email}}</p>
-        <p>{{craft.name}}</p>
       </div>
     </div>
     <app-craft :craft="craft" :close="closeDetail" v-if="craft !== null"></app-craft>
