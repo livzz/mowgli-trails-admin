@@ -33,7 +33,7 @@
       craftCustomers: {
         source: db.ref('craftCustomers'),
         // this is called once the data has been retrieved from firebase
-        readyCallback: function () {
+        readyCallback() {
           this.loading = false
         }
       }

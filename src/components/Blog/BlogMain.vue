@@ -10,7 +10,7 @@
       <div class="ui right floated primary button">Create New Post</div>
     </div>
     <div class="ui divided items">
-      <app-blog-list :blog="blog" v-for="(blog,i) in blogList" :key="i"></app-blog-list>
+      <app-blog-list :blog="blog" :changeType="toggleContentType" v-for="(blog,i) in blogList" :key="i"></app-blog-list>
     </div>
   </div>
 </template>
@@ -23,6 +23,16 @@
     data() {
       return {
         viewContentType: -1
+      }
+    },
+    methods: {
+      toggleContentType(blog) {
+        if (blog.type === 0) {
+          db.ref('blogs').child(blog['.key']).child('type').set(1);
+        }
+        else {
+          db.ref('blogs').child(blog['.key']).child('type').set(0);
+        }
       }
     },
     components: {

@@ -16,10 +16,10 @@
         <div class="ui right floated secondary button">
           Edit
         </div>
-        <div class="ui right floated red button" v-if="blog.type === 0">
+        <div class="ui right floated red button" v-if="blog.type === 0" @click="() => changeType(blog)">
           Publish
         </div>
-        <div class="ui right floated red button" v-else>
+        <div class="ui right floated red button" v-else @click="() => changeType(blog)">
           Archive
         </div>
       </div>
@@ -30,7 +30,7 @@
 <script>
   export default {
     name: "blog-list",
-    props: ['blog']
+    props: ['blog', 'changeType']
   }
 </script>
 
