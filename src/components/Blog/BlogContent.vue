@@ -1,34 +1,37 @@
 <template>
-  <div class="ui grid stackable">
-    <div class="ten wide column">
-      <div class="ui form">
-        <div class="field">
-          <label>Main Body</label>
-          <textarea placeholder="Enter Main Content" v-model="content.body"></textarea>
-        </div>
-        <div class="field">
-          <input
-            type="file"
-            class="ui button"
-            accept="image/*"
-            @change="onFilePicked"
-          />
+  <div>
+    <div class="ui grid stackable">
+      <div class="ten wide column">
+        <div class="ui form">
+          <div class="field">
+            <label>Content Body</label>
+            <textarea placeholder="Enter Content Body" v-model="content.body"></textarea>
+          </div>
+          <div class="field">
+            <input
+              type="file"
+              class="ui button"
+              accept="image/*"
+              @change="onFilePicked"
+            />
+          </div>
         </div>
       </div>
+      <div class="six wide column">
+        <img class="ui centered medium image" :src="imagePath" alt="Image of ths Content">
+      </div>
     </div>
-    <div class="six wide column">
-      <img class="ui centered medium image" :src="imagePath" alt="Image of ths Content">
-    </div>
+    <div class="ui divider"></div>
   </div>
 </template>
 
 <script>
   export default {
     name: "blog-content",
-    props: ['content'],
+    props: ['content', 'upload'],
     data() {
       return {
-        imagePath: ''
+        imagePath: '',
       }
     },
     methods: {
@@ -38,12 +41,11 @@
         if (fileName.lastIndexOf('.') <= 0) {
           return alert("Invalid File!!");
         }
-        const fileReader = new FileReader();
-        fileReader.addEventListener('load', () => {
-          this.imagePath = fileReader.result;
-        });
-        fileReader.readAsDataURL(files[0]);
-        this.content.image = files[0];
+        const result = this.upload(files[0]);
+        result.then(url => {
+          this.content.image = url;
+          this.imagePath = url;
+        })
       }
     }
   }

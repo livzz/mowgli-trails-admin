@@ -19,18 +19,24 @@
       <div class="ui divided items" v-else>
         <app-blog-list
           :blog="blog"
-          :changeType="toggleContentType"
+          :changeType="handleContentTypeChange"
           v-for="(blog,i) in blogList"
           :key="i">
         </app-blog-list>
       </div>
     </div>
-    <app-new-blog-post :blogPost="blogPost" :close="closeNewBlogPost" v-else></app-new-blog-post>
+    <app-new-blog-post
+      :blogPost="blogPost"
+      :newContent="handleAddContent"
+      :upload="handleUploadImage"
+      :submit="handleBlogPostSubmit"
+      :close="handleClose" v-else>
+    </app-new-blog-post>
   </div>
 </template>
 
 <script>
-  import {db} from '../../firebase';
+  import {db, app} from '../../firebase';
   import appBlogList from './BlogList';
   import appNewBlogPost from './NewBlogPost';
 
@@ -39,7 +45,8 @@
       return {
         viewContentType: -1,
         blogPost: null,
-        loading: true
+        loading: true,
+        uploadedImageUrl: []
       }
     },
     components: {
@@ -47,7 +54,7 @@
       appNewBlogPost
     },
     methods: {
-      toggleContentType(blog) {
+      handleContentTypeChange(blog) {
         if (blog.type === 0) {
           db.ref('blogs').child(blog['.key']).child('type').set(1);
         }
@@ -55,16 +62,60 @@
           db.ref('blogs').child(blog['.key']).child('type').set(0);
         }
       },
-      closeNewBlogPost() {
+      handleClose() {
         this.blogPost = null;
       },
       onNewBlogPost() {
-        this.blogPost = {};
-        this.blogPost.content = [{
+        this.blogPost = {
+          author: app.auth().currentUser.email,
+          content: [{
+            body: '',
+            image: ''
+          }],
+          date: this.formatDate(new Date()),
+          hook: '',
+          title: '',
+          type: 0
+        };
+      },
+      handleAddContent() {
+        this.blogPost.content.push({
           body: '',
           image: ''
-        }];
-      }
+        });
+      },
+      handleBlogPostSubmit() {
+        db.ref('blogs').push(this.blogPost).then(() => {
+          alert("New Post Added!!");
+          this.blogPost = null;
+        });
+
+      },
+      handleUploadImage(image) {
+        const upload = app
+          .storage()
+          .ref(`${image.name}`)
+          .put(image);
+        upload.on('state_changed', snapshot => {
+          let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
+        });
+        return upload.then(fileData => fileData.metadata.downloadURLs[0]);
+      },
+      formatDate(date) {
+        let monthNames = [
+          "January", "February", "March",
+          "April", "May", "June", "July",
+          "August", "September", "October",
+          "November", "December"
+        ];
+
+        let day = date.getDate();
+        let monthIndex = date.getMonth();
+        let year = date.getFullYear();
+
+        return day + ' ' + monthNames[monthIndex] + ' ' + year;
+      },
     },
     firebase: {
       blogs: {
@@ -86,6 +137,9 @@
           }
         })
       }
+    },
+    mounted() {
+      console.log(app.auth().currentUser);
     }
   };
 </script>
