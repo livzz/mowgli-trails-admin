@@ -1,6 +1,9 @@
 <template>
   <div id="app">
     <app-header v-if="$route.path !== '/login'"></app-header>
+    <br>
+    <br>
+    <br>
     <div class="ui container">
       <router-view/>
     </div>

@@ -1,5 +1,4 @@
 <template>
-
   <div class="item">
     <div class="image">
       <img :src="blog.mainImage">

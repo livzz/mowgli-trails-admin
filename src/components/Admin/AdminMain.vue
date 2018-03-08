@@ -6,7 +6,13 @@
       <br>
     </div>
     <div v-if="!loading && craft === null">
-      <div class="ui raised segment pointer" v-for="craft in craftCustomers" @click="viewDetail(craft)">
+      <div
+        class="ui segment pointer"
+        v-for="(craft,i) in craftCustomers"
+        @click="viewDetail(craft)"
+        v-bind:class="{ raised : raised && hoveredCraft === i }"
+        @mouseover="() => { raised = true; hoveredCraft = i; }"
+        @mouseleave="raised = false">
         <p class="ui header">{{craft.name}}</p>
         <p>{{craft.email}}</p>
       </div>
@@ -23,7 +29,9 @@
     data() {
       return {
         loading: true,
-        craft: null
+        craft: null,
+        raised: false,
+        hoveredCraft: -1
       }
     },
     components: {

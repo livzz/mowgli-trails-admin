@@ -1,5 +1,5 @@
 <template>
-    <div class="ui primary menu inverted">
+  <div class="ui primary top fixed menu inverted">
         <router-link tag="a" to="/" class="item" active-class="active" exact>Home</router-link>
         <router-link tag="a" to="/blog" class="item" active-class="active" exact>Blog</router-link>
         <router-link tag="a" to="/tour" class="item" active-class="active" exact>Tour</router-link>
