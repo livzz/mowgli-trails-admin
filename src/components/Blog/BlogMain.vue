@@ -19,6 +19,7 @@
       <div class="ui divided items" v-else>
         <app-blog-list
           :blog="blog"
+          :edit="onEditContent"
           :changeType="handleContentTypeChange"
           v-for="(blog,i) in blogList"
           :key="i">
@@ -89,7 +90,6 @@
           alert("New Post Added!!");
           this.blogPost = null;
         });
-
       },
       handleUploadImage(image) {
         const upload = app
@@ -116,6 +116,16 @@
 
         return day + ' ' + monthNames[monthIndex] + ' ' + year;
       },
+      onEditContent(blog) {
+        this.blogPost = {
+          author: blog.author,
+          content: blog.content,
+          date: this.formatDate(new Date()),
+          hook: blog.hook,
+          title: blog.title,
+          type: blog.type
+        }
+      }
     },
     firebase: {
       blogs: {

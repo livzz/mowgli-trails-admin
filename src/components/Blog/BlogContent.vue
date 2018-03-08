@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="six wide column">
-        <img class="ui centered medium image" :src="imagePath" alt="Image of ths Content">
+        <img class="ui centered medium image" :src="content.image" alt="Image of ths Content">
       </div>
     </div>
     <div class="ui divider"></div>

@@ -12,7 +12,7 @@
         <p>{{blog.hook}}</p>
       </div>
       <div class="extra">
-        <div class="ui right floated secondary button">
+        <div class="ui right floated secondary button" @click="() => edit(blog)">
           Edit
         </div>
         <div class="ui right floated red button" v-if="blog.type === 0" @click="() => changeType(blog)">
@@ -29,7 +29,7 @@
 <script>
   export default {
     name: "blog-list",
-    props: ['blog', 'changeType']
+    props: ['blog', 'changeType', 'edit']
   }
 </script>
 
