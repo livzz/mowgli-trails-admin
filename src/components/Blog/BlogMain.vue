@@ -19,7 +19,7 @@
       <div class="ui divided items" v-else>
         <app-blog-list
           :blog="blog"
-          :edit="onEditContent"
+          :edit="handleEditContent"
           :changeType="handleContentTypeChange"
           v-for="(blog,i) in blogList"
           :key="i">
@@ -47,7 +47,9 @@
         viewContentType: -1,
         blogPost: null,
         loading: true,
-        uploadedImageUrl: []
+        uploadedImageUrl: [],
+        isPreviousPostEdit: false,
+        key: ''
       }
     },
     components: {
@@ -64,6 +66,7 @@
         }
       },
       handleClose() {
+        this.isPreviousPostEdit = false;
         this.blogPost = null;
       },
       onNewBlogPost() {
@@ -86,15 +89,23 @@
         });
       },
       handleBlogPostSubmit() {
-        db.ref('blogs').push(this.blogPost).then(() => {
-          alert("New Post Added!!");
-          this.blogPost = null;
-        });
+        if (this.isPreviousPostEdit) {
+          db.ref('blogs').child(this.key).set(this.blogPost).then(() => {
+            alert("New Post Added!!");
+            this.blogPost = null;
+          });
+          this.isPreviousPostEdit = false;
+        } else {
+          db.ref('blogs').push(this.blogPost).then(() => {
+            alert("New Post Added!!");
+            this.blogPost = null;
+          });
+        }
       },
       handleUploadImage(image) {
         const upload = app
           .storage()
-          .ref(`${image.name}`)
+          .ref(`blog/${image.name}`)
           .put(image);
         upload.on('state_changed', snapshot => {
           let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -116,7 +127,7 @@
 
         return day + ' ' + monthNames[monthIndex] + ' ' + year;
       },
-      onEditContent(blog) {
+      handleEditContent(blog) {
         this.blogPost = {
           author: blog.author,
           content: blog.content,
@@ -124,7 +135,9 @@
           hook: blog.hook,
           title: blog.title,
           type: blog.type
-        }
+        };
+        this.isPreviousPostEdit = true;
+        this.key = blog['.key']
       }
     },
     firebase: {
@@ -147,9 +160,6 @@
           }
         })
       }
-    },
-    mounted() {
-      console.log(app.auth().currentUser);
     }
   };
 </script>

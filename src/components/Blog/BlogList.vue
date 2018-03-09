@@ -15,7 +15,7 @@
         <div class="ui right floated secondary button" @click="() => edit(blog)">
           Edit
         </div>
-        <div class="ui right floated red button" v-if="blog.type === 0" @click="() => changeType(blog)">
+        <div class="ui right floated button green" v-if="blog.type === 0" @click="() => changeType(blog)">
           Publish
         </div>
         <div class="ui right floated red button" v-else @click="() => changeType(blog)">
