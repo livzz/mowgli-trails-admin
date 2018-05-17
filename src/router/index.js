@@ -5,6 +5,7 @@ import AdminMain from '@/components/Admin/AdminMain';
 import TourMain from '@/components/Tour/TourMain';
 import BlogMain from '@/components/Blog/BlogMain';
 import LoginMain from '@/components/Login/LoginMain';
+import DestinationMain from '@/components/Destination/DestinationMain';
 import store from '../store';
 
 Vue.use(Router);
@@ -32,6 +33,14 @@ const router = new Router({
       path: '/blog',
       name: 'BlogMain',
       component: BlogMain,
+      meta: {
+        requireAuth: true,
+      },
+    },
+    {
+      path: '/destinations',
+      name: 'DestinationMain',
+      component: DestinationMain,
       meta: {
         requireAuth: true,
       },

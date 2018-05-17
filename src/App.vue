@@ -16,7 +16,7 @@ import Header from './components/Header/HeaderMain';
 export default {
   name: 'App',
   components: {
-    appHeader: Header
+    appHeader: Header,
   },
   created() {
     this.$store.dispatch('initAuthState');
@@ -24,12 +24,12 @@ export default {
   computed: {
     isLoggedIn() {
       return this.$store.getters.getAuthState;
-    }
+    },
   },
   methods: {
     toLogin() {
       this.$router.push('/login');
-    }
+    },
   },
   watch: {
     $route(to) {
@@ -38,8 +38,8 @@ export default {
           this.toLogin();
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

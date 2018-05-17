@@ -4,21 +4,17 @@
       <div class="ui form">
         <div class="two fields">
           <div class="field">
-            <label>Activity</label>
-            <input type="text" placeholder="Enter Title" v-model="tour.activity">
+            <label>Location</label>
+            <input placeholder="Enter Summery" maxlength="30" v-model="destination.location"/>
           </div>
           <div class="field">
             <label>Category</label>
-            <select class="ui fluid dropdown" v-model="tour.category">
+            <select class="ui fluid dropdown" v-model="destination.category">
               <option selected>Select a category</option>
               <option>Featured</option>
               <option>Curated</option>
             </select>
           </div>
-        </div>
-        <div class="field">
-          <label>Location</label>
-          <input placeholder="Enter Summery" maxlength="30" v-model="tour.location"/>
         </div>
       </div>
       <br>
@@ -27,7 +23,8 @@
           <div class="ui form">
             <div class="field">
               <label>Description</label>
-              <textarea placeholder="Enter Content Body" v-model="tour.description"></textarea>
+              <textarea placeholder="Enter Content Body" v-model="destination.description">
+              </textarea>
             </div>
             <div class="field">
               <input
@@ -40,7 +37,7 @@
           </div>
         </div>
         <div class="six wide column">
-          <img class="ui centered medium image" :src="tour.image" alt="Image of ths Content">
+          <img class="ui centered medium image" :src="destination.image" alt="Image of ths Content">
         </div>
       </div>
       <button class="ui right floated primary button" @click="submit">Submit</button>
@@ -53,8 +50,8 @@
 
 <script>
 export default {
-  name: 'new-tour',
-  props: ['tour', 'submit', 'cancel', 'upload'],
+  name: 'new-destination',
+  props: ['destination', 'submit', 'cancel', 'upload'],
   methods: {
     onFilePicked(event) {
       const files = event.target.files;
@@ -64,7 +61,7 @@ export default {
       }
       const result = this.upload(files[0]);
       return result.then((url) => {
-        this.tour.image = url;
+        this.destination.image = url;
       });
     },
   },

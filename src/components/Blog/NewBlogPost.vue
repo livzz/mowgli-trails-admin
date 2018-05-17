@@ -23,21 +23,21 @@
 </template>
 
 <script>
-  import appBlogContent from './BlogContent';
+import appBlogContent from './BlogContent';
 
-  export default {
-    name: "blog-detail",
-    props: ['close', 'blogPost', 'newContent', 'upload', 'submit'],
-    components: {
-      appBlogContent
+export default {
+  name: 'blog-detail',
+  props: ['close', 'blogPost', 'newContent', 'upload', 'submit'],
+  components: {
+    appBlogContent,
+  },
+  methods: {
+    onAddMoreContent() {
+      this.newContent();
+      this.$forceUpdate();
     },
-    methods: {
-      onAddMoreContent() {
-        this.newContent();
-        this.$forceUpdate();
-      }
-    }
-  }
+  },
+};
 </script>
 
 <style scoped>

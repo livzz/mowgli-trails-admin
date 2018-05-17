@@ -26,29 +26,29 @@
 </template>
 
 <script>
-  export default {
-    name: "blog-content",
-    props: ['content', 'upload'],
-    data() {
-      return {
-        imagePath: '',
+export default {
+  name: 'blog-content',
+  props: ['content', 'upload'],
+  data() {
+    return {
+      imagePath: '',
+    };
+  },
+  methods: {
+    onFilePicked(event) {
+      const files = event.target.files;
+      const fileName = files[0].name;
+      if (fileName.lastIndexOf('.') <= 0) {
+        return alert('Invalid File!!');
       }
+      const result = this.upload(files[0]);
+      return result.then((url) => {
+        this.content.image = url;
+        this.imagePath = url;
+      });
     },
-    methods: {
-      onFilePicked(event) {
-        const files = event.target.files;
-        let fileName = files[0].name;
-        if (fileName.lastIndexOf('.') <= 0) {
-          return alert("Invalid File!!");
-        }
-        const result = this.upload(files[0]);
-        result.then(url => {
-          this.content.image = url;
-          this.imagePath = url;
-        })
-      }
-    }
-  }
+  },
+};
 </script>
 
 <style scoped>

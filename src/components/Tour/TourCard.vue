@@ -17,10 +17,10 @@
 </template>
 
 <script>
-  export default {
-    name: "tour-list",
-    props: ['tour', 'editTour', 'deleteTour']
-  }
+export default {
+  name: 'tour-list',
+  props: ['tour', 'editTour', 'deleteTour'],
+};
 </script>
 
 <style scoped>
