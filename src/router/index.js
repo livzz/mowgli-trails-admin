@@ -6,6 +6,8 @@ import TourMain from '@/components/Tour/TourMain';
 import BlogMain from '@/components/Blog/BlogMain';
 import LoginMain from '@/components/Login/LoginMain';
 import DestinationMain from '@/components/Destination/DestinationMain';
+import MailingMain from '@/components/Mailing/MailingMain';
+import PlacesMain from '@/components/Places/PlacesMain';
 import store from '../store';
 
 Vue.use(Router);
@@ -49,6 +51,22 @@ const router = new Router({
       path: '/login',
       name: 'LoginMain',
       component: LoginMain,
+    },
+    {
+      path: '/mailing',
+      name: 'MailingMain',
+      component: MailingMain,
+      meta: {
+        requireAuth: true,
+      },
+    },
+    {
+      path: '/places',
+      name: 'PlacesMain',
+      component: PlacesMain,
+      meta: {
+        requireAuth: true,
+      },
     },
   ],
 });

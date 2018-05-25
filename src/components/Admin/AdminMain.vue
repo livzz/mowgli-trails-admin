@@ -13,8 +13,8 @@
         v-bind:class="{ raised : raised && hoveredCraft === i }"
         @mouseover="() => { raised = true; hoveredCraft = i; }"
         @mouseleave="raised = false">
-        <p class="ui header">{{craft.name}}</p>
-        <p>{{craft.email}}</p>
+        <p class="ui header">{{craft.userDetails.name}}</p>
+        <p>{{craft.userDetails.email}}</p>
       </div>
     </div>
     <app-craft :craft="craft" :close="closeDetail" v-if="craft !== null"></app-craft>
