@@ -4,7 +4,7 @@
       <img :src="tour.image">
     </a>
     <div class="content">
-      <a class="header" href="#">{{tour.activity}}</a>
+      <a class="header" href="#">{{tour.title}}</a>
       <div class="meta">
         <a>{{tour.location}}</a>
       </div>

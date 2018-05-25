@@ -61,6 +61,7 @@ export default {
         image: tour.image,
         location: tour.location,
         description: tour.description,
+        title: tour.title,
         category: tour.category,
       };
       this.key = tour['.key'];
@@ -82,6 +83,7 @@ export default {
         image: '',
         location: '',
         description: '',
+        title: '',
         category: 'Select a category',
       };
     },
