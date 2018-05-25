@@ -59,6 +59,7 @@ export default {
     },
     handleEdit(destination) {
       this.newDestination = {
+        title: destination.title,
         image: destination.image,
         location: destination.location,
         description: destination.description,
@@ -79,7 +80,7 @@ export default {
     },
     onAddDestination() {
       this.newDestination = {
-        activity: '',
+        title: '',
         image: '',
         location: '',
         description: '',

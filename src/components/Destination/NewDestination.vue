@@ -2,10 +2,14 @@
   <div>
     <div class="ui segment">
       <div class="ui form">
+        <div class="field">
+          <label>Title</label>
+          <input placeholder="Enter Title" maxlength="150" v-model="destination.title"/>
+        </div>
         <div class="two fields">
           <div class="field">
             <label>Location</label>
-            <input placeholder="Enter Summery" maxlength="30" v-model="destination.location"/>
+            <input placeholder="Enter Summery" v-model="destination.location"/>
           </div>
           <div class="field">
             <label>Category</label>
