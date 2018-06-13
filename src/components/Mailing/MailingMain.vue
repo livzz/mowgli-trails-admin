@@ -13,7 +13,7 @@
       </thead>
       <tbody>
         <tr v-for="email in emails" :key="email['key']">
-          <td>{{email['.key']}}</td>
+          <td>{{email['.key'] | mailify}}</td>
           <td>{{email['.value']}}</td>
         </tr>
       </tbody>
@@ -38,6 +38,12 @@ export default {
       readyCallback() {
         this.loading = false;
       },
+    },
+  },
+  filters: {
+    mailify(value) {
+      if (!value) return '';
+      return atob(value);
     },
   },
 };
